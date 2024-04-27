@@ -159,6 +159,19 @@ gulp.task('scripts.lib.dev', gulp.series(function(done) {
 	done();
 }));
 
+
+/**
+ * Move Blocks
+ */
+gulp.task('move-block-files', function(done) {
+	// Copy all files in the blocks folder, including subdirectories
+	gulp.src(paths.src.root + '/blocks/**/*.{css,json,php}', { allowEmpty: true })
+	  .pipe(gulp.dest(paths.public.root + '/blocks'));
+  
+	done();
+  });
+
+
 /**
 * Main scripts development
 */
@@ -299,7 +312,7 @@ gulp.task('default', gulp.series(function(done) {
 		'move-screenshot',
 		'optim-images',
 		'acf-json',
-		
+		'move-block-files',
 		],
 		'clean.dev.styles'
 		)
@@ -316,6 +329,7 @@ gulp.task('watch', gulp.parallel([
 	'move-assets',
 	//'acf-json',
 	'move-screenshot',
+	'move-block-files',
 	'browser-sync',
 	'browser-sync-reload'
 	], function() {
@@ -326,7 +340,7 @@ gulp.task('watch', gulp.parallel([
 		gulp.watch(paths.src.css + '**/*.scss', gulp.series(['styles.dev']));
 		gulp.watch(paths.src.root + '/**/*.{php,html,scss,css,svg}', gulp.series(['styles.dev']));
 		gulp.watch(paths.src.root + '/**/*.{php,html,scss,css,svg}', gulp.series(['styles-acfe.dev']));
-		
+		gulp.watch(paths.src.root + '/blocks/**/*.{css,json,php}', gulp.series(['move-block-files']));
 		gulp.watch(paths.src.root+'/**/*.{php,html,scss,css,svg}', gulp.series(['browser-sync-reload']));
 		//gulp.watch(paths.src.acfjson + '**/*', ['acf-json'])
 	}

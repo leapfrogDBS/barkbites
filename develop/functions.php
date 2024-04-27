@@ -143,6 +143,72 @@ function barkbites_scripts() {
 }
 add_action('wp_enqueue_scripts', 'barkbites_scripts');
 
+
+/* Make styles available in the block editor */
+function mytheme_enqueue_block_editor_assets() {
+	wp_enqueue_style('davidmcdonagh-block-editor-style', get_template_directory_uri() . '/style.css', '', _S_VERSION);
+}
+add_action( 'enqueue_block_editor_assets', 'mytheme_enqueue_block_editor_assets' );
+
+/**
+ * Register ACF Blocks
+ */
+function mytheme_register_all_blocks() {
+    $block_directories = glob(get_template_directory() . "/blocks/*", GLOB_ONLYDIR);
+
+    foreach ($block_directories as $block) {
+        register_block_type($block);
+    }
+}
+add_action('init', 'mytheme_register_all_blocks');
+
+/**
+ * ACF fields
+ */
+add_filter('acf/settings/save_json', 'my_acf_json_save_point');
+ 
+function my_acf_json_save_point( $path ) {
+    
+
+    // update path
+    $path = ABSPATH . '../develop/acf-json';
+
+    // return
+    return $path;
+}
+
+add_filter('acf/settings/load_json', 'my_acf_json_load_point');
+
+function my_acf_json_load_point( $paths ) {
+    
+    // remove original path (optional)
+    unset($paths[0]);
+    
+    
+    // append path
+    $paths[] = ABSPATH . '../develop/acf-json';
+    $paths[] = get_template_directory() . '/acf-json';
+    
+    
+    // return
+    return $paths;
+    
+}
+
+/**
+ * Allow svgs
+ */
+function cc_mime_types($mimes) {
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+  }
+  
+  add_filter('upload_mimes', 'cc_mime_types');
+
+
+  /* Add woocommerce support */
+  add_theme_support( 'woocommerce' );
+
 /**
  * Implement the Custom Header feature.
  */
