@@ -140,6 +140,12 @@ add_action( 'widgets_init', 'barkbites_widgets_init' );
 function barkbites_scripts() {
     wp_enqueue_style('barkbites-style', get_template_directory_uri() . '/style.css', '', _S_VERSION);
     wp_enqueue_script('barkbites-app-js', get_template_directory_uri() . '/scripts/site/app.min.js', array(), _S_VERSION, true);
+
+	/* Splide */
+	wp_enqueue_style('splide-css', get_template_directory_uri() . '/assets/css/splide.min.css', '', _S_VERSION);
+    wp_enqueue_script('splide-js', get_template_directory_uri() . '/scripts/lib/splide.min.js', array(), _S_VERSION, true);
+	wp_enqueue_script('splide-config-js', get_template_directory_uri() . '/scripts/site/splide-config.min.js', array('splide-js'), _S_VERSION, true);
+	
 }
 add_action('wp_enqueue_scripts', 'barkbites_scripts');
 

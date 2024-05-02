@@ -16,6 +16,9 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<!-- TrustBox script -->
+		<script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+	<!-- End TrustBox script -->
 
 	<?php wp_head(); ?>
 </head>
@@ -25,7 +28,7 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'barkbites' ); ?></a>
 
-	<header id="masthead" class="site-header">
+	<header id="masthead" class="site-header hidden">
 		<div class="site-branding">
 			<?php
 			the_custom_logo();
