@@ -6,8 +6,8 @@
  */
 
 // Load values and assign defaults.
-$title = get_field('hero_title') ?: 'Your title here...';
-$btn_label = get_field('hero_button_label');
+$title = get_acf('hero_title') ?: 'Your title here...';
+$btn_label = get_acf('hero_button_label');
 
 // Support custom "anchor" values.
 $anchor = '';

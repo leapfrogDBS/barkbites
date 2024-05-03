@@ -1,0 +1,29 @@
+/* Hamburger */
+#hamburger {
+    svg {
+        path {
+            @apply transition-all duration-500 ease-in-out;
+        }
+        #top-line {
+            
+            @apply origin-top;
+        }
+        #bottom-line {
+            
+            @apply origin-left;
+        }
+    }
+    &.toggle {
+        #top-line {
+            transform: rotate(45deg) translate(7px, -1px);
+        }
+
+        #bottom-line {
+            transform: rotate(-45deg);
+        }
+
+        #middle-line {
+           @apply opacity-0;
+        }
+    }
+}

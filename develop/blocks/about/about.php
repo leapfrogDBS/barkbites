@@ -7,7 +7,7 @@
 
 // Load values and assign defaults.
 $tp_code = get_field('trustpilot_code');
-$copy = get_field('about_copy');
+$copy = get_acf('about_copy');
 
 
 // Support custom "anchor" values.

@@ -215,6 +215,34 @@ function cc_mime_types($mimes) {
   /* Add woocommerce support */
   add_theme_support( 'woocommerce' );
 
+  function get_acf($key, $post_id = null) {
+    $field = get_field_object($key, $post_id);
+    if (!$field) {
+        return ''; // Return empty if the field doesn't exist
+    }
+    $value = $field['value'];
+    $type = $field['type'];
+
+    switch ($type) {
+        case 'text':
+        case 'textarea':
+        case 'select':
+            return esc_html($value);
+        case 'url':
+        case 'email':
+        case 'image':
+        case 'file':
+            return esc_url($value);
+        case 'wysiwyg':
+            return wp_kses_post($value);
+        case 'number':
+        case 'range':
+            return is_numeric($value) ? $value : 0;  // Ensure it's a number.
+        default:
+            return esc_html($value);  // Safe fallback for any unclassified types.
+    }
+}
+
 /**
  * Implement the Custom Header feature.
  */
