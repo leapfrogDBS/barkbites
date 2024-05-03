@@ -109,3 +109,21 @@
 
 		</div>
 	</header><!-- #masthead -->
+
+
+	<script>
+		let lastScrollTop = 0;
+	const header = document.getElementById('masthead'); // Adjust this if your header ID is different
+
+	window.addEventListener("scroll", function(){
+	let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+	if (currentScroll > lastScrollTop){
+		// Scrolling down
+		header.classList.add("hide-header");
+	} else {
+		// Scrolling up
+		header.classList.remove("hide-header");
+	}
+	lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+	}, false);
+	</script>

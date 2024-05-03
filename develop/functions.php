@@ -243,6 +243,12 @@ function cc_mime_types($mimes) {
     }
 }
 
+// ADD ACF OPTIONS PAGE
+if( function_exists('acf_set_options_page_title') )
+{
+    acf_add_options_page('Theme Options');
+}
+
 /**
  * Implement the Custom Header feature.
  */

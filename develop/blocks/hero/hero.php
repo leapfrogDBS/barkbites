@@ -26,6 +26,7 @@ if (!empty($block['className'])) {
     <div class="w-full h-full  object-cover mix-blend-multiply absolute top-0 left-0">
         <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/img/hero.jpg" class="bg-cover bg-center w-full h-full" alt="Hero Background"></div>
     </div>
+    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
     <div class="container"> 
         <div class="flex flex-col items-center justify-center h-full">  
             <!-- Text Content -->
@@ -35,7 +36,7 @@ if (!empty($block['className'])) {
                 <?php endif; ?>
             </div>
             <?php if($btn_label): ?>
-                <a href="#" class="mt-6 z-10 bg-white rounded-3xl py-3 px-12"><?= $btn_label; ?></a>
+                <a href="#" class="mt-6 z-10 btn-white"><?= $btn_label; ?></a>
             <?php endif; ?>
         </div>
     </div>

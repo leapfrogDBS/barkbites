@@ -27,3 +27,13 @@
         }
     }
 }
+
+
+/* CSS for header animation */
+#masthead {
+    transition: top 0.8s ease-in-out;
+  }
+  
+.hide-header {
+    top: -150px; /* Adjust according to the height of your header */
+}

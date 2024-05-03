@@ -16,7 +16,7 @@
 			<div class="flex flex-col lg:flex-row gap-14 justify-between">
 				<div class="site-branding md:order-3">
 					<a href="<?php bloginfo('url');?>" class="site-logo">
-						<img class="w-[260px]" src="<?php echo get_stylesheet_directory_uri();?>/assets/img/logo.png" alt="<?php bloginfo('name');?> Logo"/>
+						<img class="w-[200px]" src="<?php echo get_stylesheet_directory_uri();?>/assets/img/footer/footer-logo.png" alt="<?php bloginfo('name');?> Logo"/>
 					</a>
 				</div><!-- .site-branding -->
 
