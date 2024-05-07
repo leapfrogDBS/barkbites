@@ -37,3 +37,13 @@
 .hide-header {
     top: -150px; /* Adjust according to the height of your header */
 }
+
+
+/* Image Gallery Ratio on product pages */
+.woocommerce div.product div.images .woocommerce-product-gallery__image {
+    @apply relative w-full overflow-hidden pt-[300px] md:pt-[12%];
+        
+    img {
+        @apply absolute top-0 left-0 w-full h-full object-cover;
+    }
+}
