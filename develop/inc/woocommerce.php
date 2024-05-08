@@ -224,3 +224,42 @@ if ( ! function_exists( 'barkbites_woocommerce_header_cart' ) ) {
 		<?php
 	}
 }
+
+
+/* Remove Sidebar from Woocommerce Pages */
+remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+
+
+// Remove existing WooCommerce hooks
+function theme_customize_product_summary() {
+    // Remove breadcrumbs from original position
+    remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+
+    // Remove the original add to cart form to reposition it later
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+}
+
+add_action('init', 'theme_customize_product_summary');
+
+// Re-hook the breadcrumbs to appear above the title
+add_action('woocommerce_single_product_summary', 'woocommerce_breadcrumb', 4);
+
+// Add the custom product description after the title
+add_action('woocommerce_single_product_summary', 'custom_product_description', 11);
+
+// Re-hook the add to cart form to appear after the description
+add_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 21);
+
+function custom_product_description() {
+    global $post;
+    echo '<div class="woocommerce-product-details__description my-6">';
+    the_content();
+    echo '</div>';
+}
+
+/* Remove Product Tabs */
+add_action( 'init', 'theme_remove_product_tabs' );
+
+function theme_remove_product_tabs() {
+    remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+}
