@@ -47,3 +47,152 @@
         @apply absolute top-0 left-0 w-full h-full object-cover;
     }
 }
+
+/*Product Page */
+.entry-summary {
+    @apply space-y-6;
+    .woocommerce-breadcrumb {
+        @apply text-charcoal font-bold;
+    }
+    .price {
+        @apply heading-three;
+    }
+    .stock {
+        @apply text-charcoal font-semibold;
+    }
+    .cart {
+        @apply space-y-6;
+    }
+    .woocommerce-product-details__description {
+        @apply space-y-4;
+    }
+    /* Container holding the quantity input and possibly increment buttons */
+    .quantity {
+        @apply flex items-center;
+
+        .qty,
+        .increment-button {
+            @apply mx-1 px-3 py-2 border border-gray-300 bg-white rounded-md;
+        }
+
+        .increment-button {
+            @apply hover:bg-gray-100 cursor-pointer;
+
+            &:hover {
+            @apply bg-gray-100;
+            }
+        }
+
+        .qty {
+            @apply px-6;
+        }
+    }
+}
+
+/* Related Products */
+.related.products {
+    @apply my-12;
+    >h2 {
+        @apply heading-three mb-12;
+    }
+    ul.products {
+        @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12;
+        .product {
+            img {
+                @apply w-full h-auto object-cover;
+            }
+            .woocommerce-loop-product__title {
+                @apply heading-four mt-4;
+            }
+            .price {
+                @apply block my-2;
+            }
+            .button {
+                @apply block;
+            }
+        }
+    }
+}
+
+
+/* Contact Form */
+// Targeting all input types used by Contact Form 7
+.wpcf7 {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select,
+    textarea {
+        @apply bg-white w-full p-3 text-[15px] md:text-[20px]  border-2 border-solid border-charcoal outline-none;
+        margin-bottom: 14px; // Gap between inputs
+
+        // Placeholder styles
+        &::placeholder {
+        @apply text-[#adadad]; // Replace 'text-off-black' with your Tailwind color class
+        }
+
+        // Input text color
+        @apply text-charcoal; // Replace 'text-off-black' with your Tailwind color class
+    }
+    textarea {
+        @apply h-48;
+    }
+    .wpcf7-submit {
+        @apply btn btn-copper;
+    }
+}
+
+
+/* General Woocommerce Styles */
+.single_add_to_cart_button, .add_to_cart_button, .wc-block-cart__submit-button, .wc-block-components-checkout-place-order-button   {
+    @apply btn btn-copper;
+}
+
+
+/* Woocommerce notices */
+.woocommerce-notices-wrapper {
+    @apply bg-copper text-white mb-6;
+    .woocommerce-info, .woocommerce-message {
+        @apply text-base p-4;
+    }
+    a {
+        @apply underline font-bold;
+    }
+}
+
+
+/* Cart Page */
+.wp-block-woocommerce-cart, .wp-block-woocommerce-checkout  {
+    @apply container;
+}
+
+
+/* Category Page */
+.tax-product_cat, .woocommerce-shop  {
+    .site-main {
+        @apply container;
+        .page-title {
+            @apply heading-two mb-6;
+        }
+        .term-description {
+            @apply space-y-6;
+        }
+        .products {
+            @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12;
+            .product {
+                img {
+                    @apply w-full h-auto object-cover;
+                }
+                .woocommerce-loop-product__title {
+                    @apply heading-four mt-4;
+                }
+                .price {
+                    @apply block my-2;
+                }
+                .button {
+                    @apply block;
+                }
+            }
+        }
+    }
+}

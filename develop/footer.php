@@ -14,7 +14,7 @@
 	<footer id="colophon" class="site-footer bg-copper text-white">
 		<div class="container py-14 md:pt-20 pb-7 z-0">
 			<div class="flex flex-col lg:flex-row gap-14 justify-between">
-				<div class="site-branding md:order-3">
+				<div class="site-branding lg:order-3">
 					<a href="<?php bloginfo('url');?>" class="site-logo">
 						<img class="w-[200px]" src="<?php echo get_stylesheet_directory_uri();?>/assets/img/footer/footer-logo.png" alt="<?php bloginfo('name');?> Logo"/>
 					</a>
@@ -58,10 +58,26 @@
 
 			
 			</div>
+			<?php if( have_rows('policy_pages', 'option') ): ?>										
+				<div class="policy-links flex items-center justify-between gap-6 flex-wrap underline text-[14px] my-12">
+					<?php while( have_rows('policy_pages', 'option') ): the_row(); 
+						$post_object = get_sub_field('policy_page');
+						if( $post_object ): 
+							// Get the post object and then retrieve the title and permalink
+							$post = $post_object;
+							setup_postdata( $post ); ?>
 
-			<div class="credit text-off-black text-sm mt-14 md:flex md:justify-between">
-				<p>Copyright &copy; <?php echo date('Y'); ?> Bark Bites Ltd</p>
-				<p class="mt-0">Site by <a href="https://www.leapfrogdbs.co.uk/" class="underline">Leapfrog Digital Business Solutions</a></p>
+							<a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
+
+							<?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
+						<?php endif; ?>
+					<?php endwhile; ?>
+				</div>
+			<?php endif; ?>
+
+			<div class="credit text-sm mt-14 md:flex md:justify-between">
+				<p class="text-white">Copyright &copy; <?php echo date('Y'); ?> Bark Bites Ltd</p>
+				<p class="mt-0 text-white">Site by <a href="https://www.leapfrogdbs.co.uk/" class="underline">Leapfrog Digital Business Solutions</a></p>
 			</div>
 
 		</div>

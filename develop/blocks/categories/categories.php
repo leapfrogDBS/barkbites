@@ -53,7 +53,8 @@ if (!empty($block['className'])) {
 
                             if ($image) {
                                 // Generate the URL to the shop page with a category filter
-                                $category_link = get_permalink(wc_get_page_id('shop')) . '?filter_category=' . $category->term_id;
+                                $category_link = get_term_link($category->term_id, 'product_cat');
+
                                 echo '<li class="splide__slide">';
                                 echo '<a href="' . esc_url($category_link) . '" class="category-image-link">';
                                 echo '<div class="category-image relative group overflow-hidden">';

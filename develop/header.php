@@ -29,11 +29,10 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'barkbites' ); ?></a>
 
 	<header id="masthead" class="site-header top-0 z-40 sticky shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] bg-white">
-		<div class="top-bar bg-copper text-white">	
-			<div class="container py-1">
-				<h4 class="heading-four text-center">Promotional message</h4>
-			</div>
-		</div>
+		<?php if (get_field('show_promtional_bar', 'option')):?>
+			<?php include(locate_template('template-parts/promotional-bar.php'));?>
+		<?php endif;?>
+
 		<div class="container flex items-center justify-between z-40 gap-x-6 py-4 sm:py-6">	
 			<div class="site-branding z-50">
 				<a href="<?php bloginfo('url');?>" class="site-logo">

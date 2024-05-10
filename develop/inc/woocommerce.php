@@ -263,3 +263,27 @@ add_action( 'init', 'theme_remove_product_tabs' );
 function theme_remove_product_tabs() {
     remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 }
+
+
+/* Remove add to cart button from related products */
+add_action( 'woocommerce_after_shop_loop_item', 'remove_related_products_add_to_cart', 1 );
+
+function remove_related_products_add_to_cart() {
+    if (is_product()) {
+        remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart');
+    }
+}
+
+/*Remove add to cart from category and shop page */
+add_action( 'woocommerce_after_shop_loop_item', 'remove_add_to_cart_buttons', 1 );
+function remove_add_to_cart_buttons() {
+  if (is_product_category() || is_shop()) {
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+  }
+}
+
+/* Show all products on the shop and category pages - wihtout pagination */
+add_filter( 'loop_shop_per_page', 'show_all_products_on_shop_page', 20 );
+function show_all_products_on_shop_page() {
+  return -1;  // -1 means show all products
+}

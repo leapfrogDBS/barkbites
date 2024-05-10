@@ -36,7 +36,7 @@ if (!empty($block['className'])) {
                 <?php endif; ?>
             </div>
             <?php if($btn_label): ?>
-                <a href="#" class="mt-6 z-10 btn-white"><?= $btn_label; ?></a>
+                <a href="#" class="mt-6 z-10 btn btn-white"><?= $btn_label; ?></a>
             <?php endif; ?>
         </div>
     </div>

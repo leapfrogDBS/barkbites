@@ -17,7 +17,7 @@ module.exports = {
         extend: {
             colors: {
                 'copper' : '#943D24',
-                'charcoal' : '##121212',
+                'charcoal' : '#121212',
             },
             backgroundImage: {
                 'buttonGradient': 'linear-gradient(90deg, #46E9C9 -4.47%, #2EB7F3 33.7%, #8A4FFF 103.42%)',

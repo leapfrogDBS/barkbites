@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.5
-Stable tag: 3.3.7
+Stable tag: 3.4.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,16 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.4.0 - 08/05/2024 =
+* Dev - Tools - Add a stock status filter to Bulk edit costs and prices.
+
+= 3.3.9 - 07/05/2024 =
+* Fix - Tools - Update product price by profit does not update Sale price.
+
+= 3.3.8 - 02/05/2024 =
+* Fix - Analytics - Stock - Variation categories are wrong.
+* Fix - Compatibility - Atum - Add Stock Sync does not calculate stock reduction properly.
 
 = 3.3.7 - 26/04/2024 =
 * Dev - Multicurrency - Create option to display COG related values from the order, such as costs and profit, in the currency of the order.

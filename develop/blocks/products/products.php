@@ -23,19 +23,17 @@ if (!empty($block['className'])) {
     <div class="container py-12 md:py-28">
         <div class="flex items-center justify-between">
             <?php if ($title): ?>
-                <h2><?php echo $title; ?></h2>
+                <h2 class="heading-two"><?php echo $title; ?></h2>
             <?php endif; ?>
             <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="btn btn-white hidden sm:flex">
                 See all products
-                <?php include(locate_template('assets/img/btn-icon.svg'));?>
             </a>
         </div>
         <?php if ($text): ?>
             <div class="max-w-[630px] mt-5 text-[15px] sm:text-[22px] leading-snug"><?php echo $text; ?></div>
         <?php endif; ?>
-        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="btn btn-green mt-7 sm:hidden">
+        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="btn btn-copper mt-7 sm:hidden">
             See all products
-            <?php include(locate_template('assets/img/btn-icon.svg'));?>
         </a>
         <div class="products mt-14 md:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-x-5 gap-y-12">
             <?php
@@ -66,9 +64,8 @@ if (!empty($block['className'])) {
                                     <div class="mt-4">
                                         <?php echo apply_filters('woocommerce_short_description', $product->get_short_description()); ?>
                                     </div>
-                                    <a href="<?php the_permalink($product_post->ID); ?>" class="btn btn-white mt-4">
+                                    <a href="<?php the_permalink($product_post->ID); ?>" class="btn btn-copper mt-4">
                                         Learn more
-                                        <?php include(locate_template('assets/img/btn-icon.svg')); ?>
                                     </a>
                                 </div>
                             </div>

@@ -249,6 +249,15 @@ if( function_exists('acf_set_options_page_title') )
     acf_add_options_page('Theme Options');
 }
 
+/* Custom image sizes */
+function mytheme_custom_image_sizes() {
+    add_theme_support('post-thumbnails');
+    add_image_size('custom-size', 300, 330, true); 
+	add_image_size( 'product-square', 450, 450, true );
+	add_image_size( 'featured-product-image', 370, 230, true );
+}
+add_action('after_setup_theme', 'mytheme_custom_image_sizes');
+
 /**
  * Implement the Custom Header feature.
  */

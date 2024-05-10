@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header( 'shop' ); ?>
-<div class="container md:flex justify-between gap-x-12 pt-1 md:py-[60px]">
+<div class="container md:flex justify-between gap-x-12	pt-12">
 
 	<?php
 		/**

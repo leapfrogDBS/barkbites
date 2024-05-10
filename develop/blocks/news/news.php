@@ -60,18 +60,16 @@ if (!empty($block['className'])) {
                 <h2 class="heading-two"><?php echo esc_html($section_title); ?></h2>
             <?php endif; ?>
             <?php if ($button_label): ?>
-                <a href="<?php echo esc_url($button_link); ?>" class="btn btn-white hidden sm:flex">
+                <a href="<?php echo esc_url($button_link); ?>" class="btn btn-copper hidden sm:flex">
                     <?php echo esc_html($button_label); ?>
-                    <?php include(locate_template('assets/img/btn-icon.svg')); ?>
                 </a>
             <?php endif; ?>
         </div>
         <?php if ($section_text): ?>
             <p class="max-w-[630px] mt-5"><?php echo esc_html($section_text); ?></p>
         <?php endif; ?>
-        <a href="<?php echo esc_url($button_link); ?>" class="btn btn-green mt-7 sm:hidden">
+        <a href="<?php echo esc_url($button_link); ?>" class="btn btn-copper mt-7 sm:hidden">
             <?php echo esc_html($button_label); ?>
-            <?php include(locate_template('assets/img/btn-icon.svg')); ?>
         </a>
 
         <div class="posts mt-8 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -89,9 +87,8 @@ if (!empty($block['className'])) {
                         <div class="post-excerpt mt-6 text-[18px] hidden md:block">
                             <?php the_excerpt(); ?>
                         </div>
-                        <a href="<?php the_permalink(); ?>" class="btn btn-white mt-4 self-start">
+                        <a href="<?php the_permalink(); ?>" class="btn btn-copper mt-4 self-start">
                             Read more
-                            <?php include(locate_template('assets/img/btn-icon.svg')); ?>
                         </a>
                     </div>
                 <?php endwhile; ?>
