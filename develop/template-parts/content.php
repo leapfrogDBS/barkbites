@@ -14,52 +14,56 @@
 	<header class="entry-header">
 
 		<?php
-		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
+		// Get the post thumbnail URL
+		$thumbnail_url = get_the_post_thumbnail_url();
+
+		if ($thumbnail_url) :
+		// Output the div with the background image and the post title
+		echo '<div class="h-64 w-full flex items-center justify-center bg-center bg-cover container relative" style="background-image: url(\'' . esc_url($thumbnail_url) . '\');">';
+		echo '<div class="absolute inset-0 bg-black opacity-30 z-10"></div>';
+			the_title('<h2 class="entry-title text-white heading-two z-20 text-center">', '</h2>');
+		echo '</div>';
 		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+			// Display the post title
+			the_title('<h2 class="entry-title heading-two text-charcoal my-24">', '</h2>');
 		endif;
+		?>
+		<?php
 
 		if ( 'post' === get_post_type() ) :
 			?>
-			<div class="entry-meta">
-				<?php
-				barkbites_posted_on();
-				barkbites_posted_by();
-				?>
-			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php barkbites_post_thumbnail(); ?>
+	
 
 	<div class="entry-content">
-		<?php
-		the_content(
-			sprintf(
-				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'barkbites' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				wp_kses_post( get_the_title() )
-			)
-		);
+		<div class="container text-content">
+			<?php
+			the_content(
+				sprintf(
+					wp_kses(
+						/* translators: %s: Name of current post. Only visible to screen readers */
+						__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'barkbites' ),
+						array(
+							'span' => array(
+								'class' => array(),
+							),
+						)
+					),
+					wp_kses_post( get_the_title() )
+				)
+			);
 
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'barkbites' ),
-				'after'  => '</div>',
-			)
-		);
-		?>
+			wp_link_pages(
+				array(
+					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'barkbites' ),
+					'after'  => '</div>',
+				)
+			);
+			?>
+		</div>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php barkbites_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+
 </article><!-- #post-<?php the_ID(); ?> -->

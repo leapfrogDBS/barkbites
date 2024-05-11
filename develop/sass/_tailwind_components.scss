@@ -70,7 +70,7 @@ p {
 
 
 /* Policy template pages - update and refactor this */ 
-.policy-template {
+.policy-template, .text-content {
     h1, h2, h3, h4 {
         @apply mb-4;
     }
