@@ -22,10 +22,10 @@ $default_image_full_src = wp_get_attachment_image_url($post_thumbnail_id, 'full'
 ?>
 
 <div class="!mt-0" 
-     data-default-image="<?php echo esc_url($default_image_thumb_src); ?>" 
-     data-default-image-full="<?php echo esc_url($default_image_full_src); ?>">
+     data-default-image="<?= esc_url($default_image_thumb_src); ?>" 
+     data-default-image-full="<?= esc_url($default_image_full_src); ?>">
     <?php if ( $attachment_ids ) : ?>
-        <div class="sticky top-12">
+        <div class="sticky top-12 mb-12">
             <div class="splide space-y-9" role="group" aria-label="Product Images" 
                 data-splide='{"arrows": false, "pagination": true, "type": "loop", "perPage": 1,
                             "breakpoints": {"768": {"gap": "0"}}}'>
@@ -33,21 +33,21 @@ $default_image_full_src = wp_get_attachment_image_url($post_thumbnail_id, 'full'
                     <ul class="splide__list product-image-splide-list ">
                         <?php if ( $post_thumbnail_id ) : ?>
                             <li class="splide__slide w-full">
-                                <a class="pt-[100%] relative block" data-fancybox data-src="<?php echo wp_get_attachment_image_url($post_thumbnail_id, 'full');?>">
-                                    <?php echo wp_get_attachment_image($post_thumbnail_id, 'thumb-400x400', false, ['class' => 'w-full h-full object-cover absolute inset-0']); ?>
+                                <a class="pt-[100%] relative block" data-fancybox data-src="<?= wp_get_attachment_image_url($post_thumbnail_id, 'full');?>">
+                                    <?= wp_get_attachment_image($post_thumbnail_id, 'thumb-400x400', false, ['class' => 'w-full h-full object-cover absolute inset-0']); ?>
                                 </a>
                             </li>
                         <?php else : ?>
                             <li class="splide__slide w-full">
                                 <div class="pt-[100%] relative">
-                                    <img class="w-full h-full object-cover absolute inset-0" src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" width="400" height="400" alt=""/>
+                                    <img class="w-full h-full object-cover absolute inset-0" src="<?= esc_url( wc_placeholder_img_src() ); ?>" width="400" height="400" alt=""/>
                                 </div>
                             </li>
                         <?php endif; ?>
                         <?php foreach ( $attachment_ids as $attachment_id ) : ?>
                             <li class="splide__slide w-full">
-                                <a class="pt-[100%] relative block" data-fancybox data-src="<?php echo wp_get_attachment_image_url($attachment_id, 'full');?>">
-                                    <?php echo wp_get_attachment_image($attachment_id, 'thumb-400x400', false, ['class' => 'w-full h-full object-cover absolute inset-0']); ?>
+                                <a class="pt-[100%] relative block" data-fancybox data-src="<?= wp_get_attachment_image_url($attachment_id, 'full');?>">
+                                    <?= wp_get_attachment_image($attachment_id, 'thumb-400x400', false, ['class' => 'w-full h-full object-cover absolute inset-0']); ?>
                                 </a>
                             </li>
                         <?php endforeach; ?>
@@ -56,7 +56,7 @@ $default_image_full_src = wp_get_attachment_image_url($post_thumbnail_id, 'full'
             </div>
         </div>
     <?php else : ?>
-        <figure class="single-image pt-[100%] sticky top-12" <?php echo $post_thumbnail_id ? 'data-fancybox data-src="'.esc_url($default_image_full_src).'"' : ''; ?>>
+        <figure class="single-image pt-[100%] sticky top-12" <?= $post_thumbnail_id ? 'data-fancybox data-src="'.esc_url($default_image_full_src).'"' : ''; ?>>
             <?php
                 if ($post_thumbnail_id) {
                     echo wp_get_attachment_image($post_thumbnail_id, 'thumb-400x400', false, ['class' => 'w-full h-full object-cover absolute inset-0']);

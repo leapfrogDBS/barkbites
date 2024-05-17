@@ -227,21 +227,52 @@ function cc_mime_types($mimes) {
         case 'text':
         case 'textarea':
         case 'select':
+        case 'radio':
+        case 'checkbox':
+        case 'button_group':
             return esc_html($value);
         case 'url':
         case 'email':
         case 'image':
         case 'file':
+        case 'page_link':
             return esc_url($value);
         case 'wysiwyg':
             return wp_kses_post($value);
         case 'number':
         case 'range':
             return is_numeric($value) ? $value : 0;  // Ensure it's a number.
+        case 'link':
+            return [
+                'url' => esc_url($value['url']),
+                'title' => esc_html($value['title']),
+                'target' => isset($value['target']) ? esc_attr($value['target']) : ''
+            ];
+        case 'taxonomy':
+            if (is_array($value)) {
+                $terms = array_map('get_term', $value);
+                return $terms; // Return an array of term objects
+            } else {
+                return get_term($value); // Return a single term object
+            }
+        case 'true_false':
+            return (bool) $value;
+        case 'date_picker':
+        case 'time_picker':
+        case 'date_time_picker':
+            return esc_html($value);  // Assuming these return date/time strings
+        case 'color_picker':
+            return esc_attr($value);  // Colors should be safe as attributes
+        case 'oembed':
+            return wp_oembed_get($value);  // Embed the URL
+        case 'gallery':
+            return array_map('esc_url', $value);  // Return an array of image URLs
         default:
             return esc_html($value);  // Safe fallback for any unclassified types.
     }
 }
+
+
 
 // ADD ACF OPTIONS PAGE
 if( function_exists('acf_set_options_page_title') )
@@ -257,6 +288,13 @@ function mytheme_custom_image_sizes() {
 	add_image_size( 'featured-product-image', 370, 230, true );
 }
 add_action('after_setup_theme', 'mytheme_custom_image_sizes');
+
+/* Custom excerpt length */
+function custom_excerpt_length($length) {
+    return 40; // Change this number to the desired excerpt length in words
+}
+add_filter('excerpt_length', 'custom_excerpt_length');
+
 
 /**
  * Implement the Custom Header feature.

@@ -16,7 +16,7 @@
 			<div class="flex flex-col lg:flex-row gap-14 justify-between">
 				<div class="site-branding lg:order-3">
 					<a href="<?php bloginfo('url');?>" class="site-logo">
-						<img class="w-[200px]" src="<?php echo get_stylesheet_directory_uri();?>/assets/img/footer/footer-logo.png" alt="<?php bloginfo('name');?> Logo"/>
+						<img class="w-[200px]" src="<?= get_stylesheet_directory_uri();?>/assets/img/footer/footer-logo.png" alt="<?php bloginfo('name');?> Logo"/>
 					</a>
 				</div><!-- .site-branding -->
 
@@ -47,7 +47,7 @@
 									$post = $post_object;
 									setup_postdata( $post ); ?>
 
-									<a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
+									<a href="<?= esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
 
 									<?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
 								<?php endif; ?>
@@ -67,7 +67,7 @@
 							$post = $post_object;
 							setup_postdata( $post ); ?>
 
-							<a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
+							<a href="<?= esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
 
 							<?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
 						<?php endif; ?>
@@ -76,7 +76,7 @@
 			<?php endif; ?>
 
 			<div class="credit text-sm mt-14 md:flex md:justify-between">
-				<p class="text-white">Copyright &copy; <?php echo date('Y'); ?> Bark Bites Ltd</p>
+				<p class="text-white">Copyright &copy; <?= date('Y'); ?> Bark Bites Ltd</p>
 				<p class="mt-0 text-white">Site by <a href="https://www.leapfrogdbs.co.uk/" class="underline">Leapfrog Digital Business Solutions</a></p>
 			</div>
 

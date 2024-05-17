@@ -5,15 +5,15 @@
  * @param array $block The block settings and attributes.
  */
 // Check if 'all_categories' is true/false
-$all_categories = get_field('all_categories');
+$all_categories = get_acf('all_categories');
 
 // Get the selected category term ID
-$selected_category_id = get_field('posts_section_category');
+$selected_category_id = get_acf('posts_section_category');
 
 // Fetch additional fields
-$button_label = get_field('posts_section_button_label');
-$section_title = get_field('posts_section_heading');
-$section_text = get_field('posts_section_text');
+$button_label = get_acf('posts_section_button_label');
+$section_title = get_acf('posts_section_heading');
+$section_text = get_acf('posts_section_text');
 
 // Default args for WP_Query
 $args = array(
@@ -57,39 +57,38 @@ if (!empty($block['className'])) {
     <div class="container">
         <div class="flex items-center justify-between">
             <?php if ($section_title): ?>
-                <h2 class="heading-two"><?php echo esc_html($section_title); ?></h2>
+                <h2 class="heading-two"><?= esc_html($section_title); ?></h2>
             <?php endif; ?>
             <?php if ($button_label): ?>
-                <a href="<?php echo esc_url($button_link); ?>" class="btn btn-copper hidden sm:flex">
-                    <?php echo esc_html($button_label); ?>
+                <a href="<?= esc_url($button_link); ?>" class="inlin-bloclk btn btn-copper hidden sm:flex">
+                    <?= esc_html($button_label); ?>
                 </a>
             <?php endif; ?>
         </div>
         <?php if ($section_text): ?>
-            <p class="max-w-[630px] mt-5"><?php echo esc_html($section_text); ?></p>
+            <p class="max-w-[630px] mt-5"><?= esc_html($section_text); ?></p>
         <?php endif; ?>
-        <a href="<?php echo esc_url($button_link); ?>" class="btn btn-copper mt-7 sm:hidden">
-            <?php echo esc_html($button_label); ?>
+        <a href="<?= esc_url($button_link); ?>" class="inline-block btn btn-copper mt-7 sm:hidden">
+            <?= esc_html($button_label); ?>
         </a>
 
         <div class="posts mt-8 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-5">
             <?php if ($the_query->have_posts()) : ?>
                 <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-                    <div class="post-item flex flex-col justify-between h-full">
+                    <div class="post-item flex flex-col h-full">
                         <?php if (has_post_thumbnail()): ?>
                             <div class="post-image mb-8">
                                 <?php the_post_thumbnail('custom-size', ['class' => 'post-thumbnail']); ?>
                             </div>
                         <?php endif; ?>
                         <div class="post-title">
-                            <h4><?php the_title(); ?></h4>
+                            <h4 class="heading-four"><?php the_title(); ?></h4>
                         </div>
-                        <div class="post-excerpt mt-6 text-[18px] hidden md:block">
-                            <?php the_excerpt(); ?>
-                        </div>
-                        <a href="<?php the_permalink(); ?>" class="btn btn-copper mt-4 self-start">
+                        <div class="flex-1 flex flex-col justify-end">
+                        <a href="<?php the_permalink(); ?>" class="inline-block btn btn-copper mt-4 self-start">
                             Read more
                         </a>
+                        </div>
                     </div>
                 <?php endwhile; ?>
                 <?php wp_reset_postdata(); ?>

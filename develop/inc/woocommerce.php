@@ -180,7 +180,7 @@ if ( ! function_exists( 'barkbites_woocommerce_cart_link' ) ) {
 	 */
 	function barkbites_woocommerce_cart_link() {
 		?>
-		<a class="cart-contents" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'barkbites' ); ?>">
+		<a class="cart-contents" href="<?= esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'barkbites' ); ?>">
 			<?php
 			$item_count_text = sprintf(
 				/* translators: number of items in the mini cart. */
@@ -188,7 +188,7 @@ if ( ! function_exists( 'barkbites_woocommerce_cart_link' ) ) {
 				WC()->cart->get_cart_contents_count()
 			);
 			?>
-			<span class="amount"><?php echo wp_kses_data( WC()->cart->get_cart_subtotal() ); ?></span> <span class="count"><?php echo esc_html( $item_count_text ); ?></span>
+			<span class="amount"><?= wp_kses_data( WC()->cart->get_cart_subtotal() ); ?></span> <span class="count"><?= esc_html( $item_count_text ); ?></span>
 		</a>
 		<?php
 	}
@@ -208,7 +208,7 @@ if ( ! function_exists( 'barkbites_woocommerce_header_cart' ) ) {
 		}
 		?>
 		<ul id="site-header-cart" class="site-header-cart">
-			<li class="<?php echo esc_attr( $class ); ?>">
+			<li class="<?= esc_attr( $class ); ?>">
 				<?php barkbites_woocommerce_cart_link(); ?>
 			</li>
 			<li>
@@ -237,6 +237,9 @@ function theme_customize_product_summary() {
 
     // Remove the original add to cart form to reposition it later
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+
+	// Remove the original product rating to reposition it later
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10);
 }
 
 add_action('init', 'theme_customize_product_summary');
@@ -250,6 +253,9 @@ add_action('woocommerce_single_product_summary', 'custom_product_description', 1
 // Re-hook the add to cart form to appear after the description
 add_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 21);
 
+// Re-hook the product rating to appear at the bottom of the summary
+add_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 25);
+
 function custom_product_description() {
     global $post;
     echo '<div class="woocommerce-product-details__description my-6">';
@@ -257,12 +263,25 @@ function custom_product_description() {
     echo '</div>';
 }
 
-/* Remove Product Tabs */
-add_action( 'init', 'theme_remove_product_tabs' );
+/* Remove Product Tabs - Conditionaly show reviews if there are any for the product */
+add_filter( 'woocommerce_product_tabs', 'theme_modify_product_tabs_show_reviews', 98 );
 
-function theme_remove_product_tabs() {
-    remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+function theme_modify_product_tabs_show_reviews( $tabs ) {
+    global $product;
+
+    // Only keep the 'reviews' tab if there are reviews
+    if ( $product->get_review_count() == 0 ) {
+        unset($tabs['reviews']);
+    }
+
+    // Unset other unwanted tabs
+    unset($tabs['description']);
+    unset($tabs['additional_information']);
+
+    return $tabs;
 }
+
+
 
 
 /* Remove add to cart button from related products */
@@ -287,3 +306,29 @@ add_filter( 'loop_shop_per_page', 'show_all_products_on_shop_page', 20 );
 function show_all_products_on_shop_page() {
   return -1;  // -1 means show all products
 }
+
+/* Apply shipping rates based on cart weight */
+add_filter( 'woocommerce_package_rates', 'quadlayers_woocommerce_tiered_shipping', 9999, 2 );
+function quadlayers_woocommerce_tiered_shipping( $rates, $package ) {
+if ( WC()->cart->get_cart_contents_weight() < 2000 ) {
+if ( isset( $rates['flat_rate:4'] ) ) unset( $rates['flat_rate:5'], $rates['flat_rate:6'] );
+} elseif ( WC()->cart->get_cart_contents_weight() < 10000 ) {
+if ( isset( $rates['flat_rate:5'] ) ) unset( $rates['flat_rate:4'], $rates['flat_rate:6'] );
+} else {
+if ( isset( $rates['flat_rate:6'] ) ) unset( $rates['flat_rate:4'], $rates['flat_rate:5'] );
+}
+return $rates;
+}
+
+
+// Use custom image size for WooCommerce thumbnails
+function mytheme_custom_woocommerce_thumbnail_size() {
+    return array(
+        'width'  => 450,
+        'height' => 450,
+        'crop'   => 1,
+    );
+}
+add_filter('woocommerce_get_image_size_thumbnail', 'mytheme_custom_woocommerce_thumbnail_size');
+
+// Use custom image size for WooCommerce single product images

@@ -24,7 +24,7 @@ if (!empty($block['className'])) {
 
 <section <?= esc_attr( $anchor ); ?> class="<?= esc_attr( $class_name ); ?> hero-section relative">
     <div class="w-full h-full  object-cover mix-blend-multiply absolute top-0 left-0">
-        <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/img/hero.jpg" class="bg-cover bg-center w-full h-full" alt="Hero Background"></div>
+        <div style="background-image: url('<?= get_template_directory_uri(); ?>/assets/img/hero.jpg" class="bg-cover bg-center w-full h-full" alt="Hero Background"></div>
     </div>
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
     <div class="container"> 
@@ -36,7 +36,7 @@ if (!empty($block['className'])) {
                 <?php endif; ?>
             </div>
             <?php if($btn_label): ?>
-                <a href="#" class="mt-6 z-10 btn btn-white"><?= $btn_label; ?></a>
+                <a href="<?= get_permalink( wc_get_page_id( 'shop' ) ); ?>" class="mt-6 z-10 btn btn-white"><?= $btn_label; ?></a>
             <?php endif; ?>
         </div>
     </div>

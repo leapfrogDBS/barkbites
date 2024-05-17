@@ -88,6 +88,34 @@
         }
     }
 }
+/* Hide review avatar in WooCommerce */
+.woocommerce #reviews #comments .commentlist .avatar {
+    @apply hidden;
+}
+/* Product reviews styling */
+.woocommerce-tabs  {
+    @apply my-12;
+    .comment_container {
+        @apply py-2;
+    }
+    .comment-text {
+        @apply space-y-2;
+    }
+    .reviews_tab.active {
+        @apply heading-three mb-4;
+    }
+    .woocommerce-verification-required, .woocommerce-Reviews-title {
+        @apply hidden;
+    }
+    .star-rating {
+        @apply text-xl;
+    }
+    .description {
+        @apply text-lg italic;
+    
+    }
+
+}
 
 /* Related Products */
 .related.products {
@@ -178,7 +206,7 @@
             @apply space-y-6;
         }
         .products {
-            @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12;
+            @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12;
             .product {
                 img {
                     @apply w-full h-auto object-cover;
@@ -193,6 +221,310 @@
                     @apply block;
                 }
             }
+        }
+    }
+}
+/* Order Received Page */
+.woocommerce-order-received {
+    .woocommerce-order {
+        @apply container space-y-12;
+
+        .woocommerce-thankyou-order-received {
+            @apply text-xl font-semibold mb-4;
+        }
+
+        address {
+            @apply mb-12;
+        }
+    }
+
+    .woocommerce-table.woocommerce-table--order-details.shop_table.order_details {
+        @apply w-full border-collapse my-5 text-base leading-relaxed;
+
+        th {
+            @apply bg-gray-100 p-3 text-left font-bold border-b-2 border-gray-200;
+        }
+
+        tr {
+            @apply border-b border-gray-200;
+        }
+
+        td {
+            @apply p-3 align-top border-b border-gray-200;
+        }
+
+        tr:last-child td {
+            @apply font-bold bg-gray-50;
+        }
+
+        .woocommerce-table__product-name,
+        .woocommerce-table__product-total {
+            @apply text-gray-800;
+        }
+
+        a {
+            @apply text-blue-500 no-underline;
+
+            &:hover {
+                @apply text-blue-700 underline;
+            }
+        }
+
+        tr:hover {
+            @apply bg-gray-100;
+        }
+
+        img {
+            @apply max-w-xs h-auto mr-2;
+        }
+    }
+}
+
+
+
+/* Style the order table */
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Style the table headers */
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details th {
+    background-color: #f5f5f5;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* Style the table rows */
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Style the table data cells */
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details td {
+    padding: 12px;
+    vertical-align: top;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Highlight the total row */
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details tr:last-child td {
+    font-weight: bold;
+    background-color: #fafafa;
+}
+
+/* Style the order details labels */
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details .woocommerce-table__product-name,
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details .woocommerce-table__product-total {
+    color: #333;
+}
+
+/* Style the links */
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details a {
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details a:hover {
+    color: #005177;
+    text-decoration: underline;
+}
+
+/* Add some hover effects for table rows */
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Make sure images inside the table are styled properly */
+.woocommerce-table.woocommerce-table--order-details.shop_table.order_details img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+
+
+/* Account pages */
+/* WooCommerce Account Pages */
+.woocommerce-account {
+    .woocommerce {
+        @apply container space-y-6;
+    }
+    h2 {
+        @apply heading-two;
+    }
+
+    /* Account Navigation */
+    .woocommerce-MyAccount-navigation {
+        @apply mb-8;
+
+        ul {
+            @apply flex flex-wrap gap-4 list-none p-0;
+
+            li {
+                @apply mb-0;
+
+                a {
+                    @apply inline-block py-2 px-4 text-base text-white bg-copper rounded-lg transition-all duration-300 ease-in-out;
+
+                    &:hover {
+                        @apply bg-white text-charcoal;
+                    }
+
+                    &.is-active {
+                        @apply bg-white text-charcoal font-semibold;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Account Content */
+    .woocommerce-MyAccount-content {
+        @apply space-y-6;
+
+        h2 {
+            @apply text-xl font-semibold mb-4;
+        }
+        .woocommerce-orders-table {
+            @apply w-full;
+        }
+        .woocommerce-orders-table__header {
+            @apply text-left;
+        }
+
+        .woocommerce-addresses {
+            @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+
+            .woocommerce-Address {
+                @apply bg-white p-6 border border-gray-200 rounded-lg;
+
+                h3 {
+                    @apply text-lg font-semibold mb-2;
+                }
+
+                address {
+                    @apply not-italic mb-4;
+                }
+
+                .edit {
+                    @apply inline-block text-blue-500 hover:text-blue-700;
+                }
+            }
+        }
+
+        .woocommerce-MyAccount-orders,
+        .woocommerce-MyAccount-downloads {
+            @apply bg-white p-6 border border-gray-200 rounded-lg;
+
+            table {
+                @apply w-full text-left border-collapse;
+                
+
+                th, td {
+                    @apply p-4 border-b border-gray-200;
+                }
+
+                th {
+                    @apply bg-gray-100 font-semibold;
+                }
+                
+
+                tr:last-child td {
+                    @apply border-b-0;
+                }
+
+                a {
+                    @apply text-blue-500 hover:text-blue-700;
+                }
+            }
+        }
+
+     
+            form {
+                @apply space-y-6;
+
+            
+
+                    label {
+                        @apply block text-base font-medium;
+                    }
+
+                    input, select, textarea {
+                        @apply w-full p-3 text-base border border-gray-300 rounded-md;
+                    }
+                
+
+                .button {
+                    @apply btn btn-copper;
+                }
+            }
+        
+
+        .woocommerce-MyAccount-dashboard {
+            p {
+                @apply mb-4;
+            }
+
+            a {
+                @apply text-blue-500 hover:text-blue-700;
+            }
+        }
+    }
+}
+
+ /* Login Form */
+ .woocommerce-form-login {
+    @apply bg-white p-6 border border-gray-200 rounded-lg space-y-6;
+    h2 {
+        @apply heading-two;
+    }
+
+    .form-row {
+        @apply mb-4;
+
+        label {
+            @apply block text-base font-medium mb-1;
+        }
+
+        .woocommerce-Input {
+            @apply w-full p-3 text-base border border-gray-300 rounded-md;
+        }
+
+        .password-input {
+            @apply relative;
+
+            .show-password-input {
+                @apply absolute right-3 top-3 cursor-pointer text-gray-500 hover:text-gray-700;
+            }
+        }
+    }
+
+    .woocommerce-form__label-for-checkbox {
+        @apply flex items-center mb-4;
+
+        input {
+            @apply mr-2;
+        }
+
+        span {
+            @apply text-base;
+        }
+    }
+
+    .woocommerce-form-login__submit {
+        @apply btn btn-copper;
+    }
+
+    .woocommerce-LostPassword {
+        @apply text-blue-500 hover:text-blue-700;
+
+        a {
+            @apply text-blue-500 hover:text-blue-700;
         }
     }
 }

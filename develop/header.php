@@ -29,14 +29,14 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'barkbites' ); ?></a>
 
 	<header id="masthead" class="site-header top-0 z-40 sticky shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] bg-white">
-		<?php if (get_field('show_promtional_bar', 'option')):?>
+		<?php if (get_acf('show_promtional_bar', 'option')):?>
 			<?php include(locate_template('template-parts/promotional-bar.php'));?>
 		<?php endif;?>
 
 		<div class="container flex items-center justify-between z-40 gap-x-6 py-4 sm:py-6">	
 			<div class="site-branding z-50">
 				<a href="<?php bloginfo('url');?>" class="site-logo">
-					<img class="w-[260px]" src="<?php echo get_stylesheet_directory_uri();?>/assets/img/logo.png" alt="<?php bloginfo('name');?> Logo"/>
+					<img class="w-[260px]" src="<?= get_stylesheet_directory_uri();?>/assets/img/logo.png" alt="<?php bloginfo('name');?> Logo"/>
 				</a>
 			</div><!-- .site-branding -->
 
@@ -62,12 +62,12 @@
 					// Basket icon
 					if ( function_exists('wc_get_cart_url') ) :?>
 					<div>
-						<a class="relative block" href="<?php echo wc_get_cart_url();?>">
+						<a class="relative block" href="<?= wc_get_cart_url();?>">
 							<?php include(locate_template('assets/img/global/icon-cart.svg'));?>
 
 							<div class="cart-contents header-cart-count transition-opacity rounded-sm px-1 font-sans absolute text-[10px] font-bold right-1/2 translate-x-1/2 -mr-[4px] bottom-full leading-none
-								<?php echo ( WC()->cart->get_cart_contents_count() > 0 ) ? 'opacity-100' : 'opacity-0';?>
-								"><?php echo WC()->cart->get_cart_contents_count(); ?>
+								<?= ( WC()->cart->get_cart_contents_count() > 0 ) ? 'opacity-100' : 'opacity-0';?>
+								"><?= WC()->cart->get_cart_contents_count(); ?>
 							</div>
 						</a>
 						

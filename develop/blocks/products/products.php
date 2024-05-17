@@ -4,8 +4,20 @@
  *
  * @param array $block The block settings and attributes.
  */
-$title = get_field('fp_title');
-$text = get_field('fp_text');
+$title = get_acf('fp_title');
+$text = get_acf('fp_text');
+$linkTo = get_acf('link_to_stop_or_category');
+
+$label = get_acf('fp_button_label');
+$btnLink = '';
+
+if ($linkTo === 'shop') {
+    $btnLink = esc_url(wc_get_page_permalink('shop'));
+} elseif ($linkTo === 'category') {
+    $btnLink = get_term_link(get_acf('fp_category'));
+}
+
+
 // Support custom "anchor" values.
 $anchor = '';
 if (!empty($block['anchor'])) {
@@ -20,22 +32,26 @@ if (!empty($block['className'])) {
 ?>
 
 <section <?= esc_attr( $anchor ); ?> class="<?= esc_attr( $class_name ); ?> relative">
-    <div class="container py-12 md:py-28">
+    <div class="container ">
         <div class="flex items-center justify-between">
             <?php if ($title): ?>
-                <h2 class="heading-two"><?php echo $title; ?></h2>
+                <h2 class="heading-two"><?= $title; ?></h2>
+            <?php endif; 
+            if ($label && $btnLink): ?>
+                <a href="<?= $btnLink ?>" class="btn btn-white hidden sm:flex">
+                    <?= $label ?>
+                </a>
             <?php endif; ?>
-            <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="btn btn-white hidden sm:flex">
-                See all products
-            </a>
         </div>
         <?php if ($text): ?>
-            <div class="max-w-[630px] mt-5 text-[15px] sm:text-[22px] leading-snug"><?php echo $text; ?></div>
-        <?php endif; ?>
-        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="btn btn-copper mt-7 sm:hidden">
-            See all products
-        </a>
-        <div class="products mt-14 md:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-x-5 gap-y-12">
+            <div class="max-w-[630px] mt-5 text-[15px] sm:text-[22px] leading-snug"><?= $text; ?></div>
+        <?php endif; 
+        if ($label && $btnLink): ?>
+                <a href="<?= $btnLink ?>" class="inline-block btn btn-copper mt-7 sm:hidden">
+                    <?= $label ?>
+                </a>
+            <?php endif; ?>
+        <div class="products mt-14 md:mt-20 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-5 gap-y-12">
             <?php
                 if (have_rows('fp_products')):
                     while (have_rows('fp_products')) : the_row();
@@ -44,31 +60,22 @@ if (!empty($block['className'])) {
                             setup_postdata($product_post);
                             global $product; 
                             ?>
-                            <div class="product flex flex-col justify-between h-full">
+                            <a href="<?php the_permalink($product_post->ID); ?>"  class="product flex flex-col group">
                                 <?php 
                                     if (has_post_thumbnail($product_post->ID)): 
                                 ?>
-                                    <div class="product-image w-full h-auto">
+                                    <div class="product-image w-full h-auto overflow-hidden">
                                         <?php 
-                                            echo get_the_post_thumbnail($product_post->ID, 'product-square', ['class' => 'post-thumbnail']);
+                                            echo get_the_post_thumbnail($product_post->ID, 'product-square', ['class' => 'post-thumbnail group-hover:scale-110 transition-transform duration-300']);
 
                                         ?>
                                     </div>
                                 <?php endif; ?>
 
                                 <div class="product-content mt-8">
-                                    <div class="text-off-black flex justify-between">
-                                        <h4><?php echo get_the_title($product_post->ID); ?></h4>
-                                        <h4 class="self-end"><?php echo $product->get_price_html(); ?></h4>
-                                    </div>
-                                    <div class="mt-4">
-                                        <?php echo apply_filters('woocommerce_short_description', $product->get_short_description()); ?>
-                                    </div>
-                                    <a href="<?php the_permalink($product_post->ID); ?>" class="btn btn-copper mt-4">
-                                        Learn more
-                                    </a>
+                                    <h4 class="heading-four text-center"><?= get_the_title($product_post->ID); ?></h4>
                                 </div>
-                            </div>
+                            </a>
                             <?php   
                             wp_reset_postdata();
                         endif;

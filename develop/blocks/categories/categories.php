@@ -22,7 +22,8 @@ if (!empty($block['className'])) {
 
     <div class="container xs:px-0 max-w-none">
 
-        <h2 class="heading-two text-center">Shop by category</h2>
+        <h2 class="heading-two text-center mb-6">Browse by benefit</h2>
+        <p class="text-lg mb-12 text-center">Find the perfect natural treats for your dog's unique needs. From dental health to natural dewormers, our selection helps keep your furry friend healthy and happy. Explore now and discover the benefits today!</p>
 
         <div id="categories-splide" class="splide overflow-visible" data-splide='{
             "type": "loop",
@@ -49,18 +50,18 @@ if (!empty($block['className'])) {
                     } else {
                         foreach ($categories as $category) {
                             $thumbnail_id = get_term_meta($category->term_id, 'thumbnail_id', true);
-                            $image = wp_get_attachment_image_src($thumbnail_id, 'product_previews');
+                            $image = wp_get_attachment_image_src($thumbnail_id, 'product-square');
 
                             if ($image) {
                                 // Generate the URL to the shop page with a category filter
                                 $category_link = get_term_link($category->term_id, 'product_cat');
 
                                 echo '<li class="splide__slide">';
-                                echo '<a href="' . esc_url($category_link) . '" class="category-image-link">';
+                                echo '<a href="' . esc_url($category_link) . '" class="category-image-link group">';
                                 echo '<div class="category-image relative group overflow-hidden">';
-                                echo '<img class="w-full aspect-square transition-transform duration-500 ease-in-out transform xs:group-hover:scale-110" src="' . $image[0] . '" alt="' . $category->name . '">';
-                                echo '<div class="category-overlay"><span class="overlay-text">' . $category->name . '</span></div>';
+                                echo '<img class="w-full aspect-square object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-110" src="' . $image[0] . '" alt="' . $category->name . '">';
                                 echo '</div>';
+                                echo '<div class="category-overlay mt-4 text-center"><span class="overlay-text heading-four text-center">' . $category->name . '</span></div>';
                                 echo '</a>';
                                 echo '</li>';
                             }
