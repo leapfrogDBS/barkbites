@@ -20,7 +20,7 @@ if (!empty($block['className'])) {
 
 <section <?= esc_attr( $anchor ); ?> class="<?= esc_attr( $class_name ); ?> relative">
 
-    <div class="container xs:px-0 max-w-none">
+    <div class="container pb-0 max-w-none">
 
         <h2 class="heading-two text-center mb-6">Browse by benefit</h2>
         <p class="text-lg mb-12 text-center">Find the perfect natural treats for your dog's unique needs. From dental health to natural dewormers, our selection helps keep your furry friend healthy and happy. Explore now and discover the benefits today!</p>
@@ -30,8 +30,8 @@ if (!empty($block['className'])) {
             "perPage": 4,
             "perMove": 1,
             "gap": "3vw",
-            "pagination": false,
-            "arrows": false,
+            "pagination": true,
+            "arrows": true,
             "pauseOnHover": true,
             "autoplay": true,
             "breakpoints": {
