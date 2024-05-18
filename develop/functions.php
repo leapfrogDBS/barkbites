@@ -144,6 +144,7 @@ function barkbites_scripts() {
 	/* Splide */
 	wp_enqueue_style('splide-css', get_template_directory_uri() . '/assets/css/splide.min.css', '', _S_VERSION);
     wp_enqueue_script('splide-js', get_template_directory_uri() . '/scripts/lib/splide.min.js', array(), _S_VERSION, true);
+	wp_enqueue_script('splide-autoscroll-js', get_template_directory_uri() . '/scripts/lib/splide-extension-auto-scroll.min.js', array(), _S_VERSION, true);
 	wp_enqueue_script('splide-config-js', get_template_directory_uri() . '/scripts/site/splide-config.min.js', array('splide-js'), _S_VERSION, true);
 	
 }

@@ -33,14 +33,14 @@ if (!empty($block['className'])) {
             "pagination": true,
             "arrows": true,
             "pauseOnHover": true,
-            "autoplay": true,
+            "autoplay": false,
             "breakpoints": {
                 "1024": {"perPage": 3},
                 "768": {"perPage": 2},
                 "480": {"perPage": 1, "pagination": true}
             }
         }'>
-            <div class="splide__track xs:!px-[10vw]">
+            <div class="splide__track ">
                 <ul class="splide__list">
                     <?php
                     $categories = get_terms('product_cat', array('hide_empty' => false, 'parent' => 0));

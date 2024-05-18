@@ -50,41 +50,63 @@ if (!empty($block['className'])) {
                 <a href="<?= $btnLink ?>" class="inline-block btn btn-copper mt-7 sm:hidden">
                     <?= $label ?>
                 </a>
-            <?php endif; ?>
-        <div class="products mt-14 md:mt-20 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-5 gap-y-12">
-            <?php
-                if (have_rows('fp_products')):
-                    while (have_rows('fp_products')) : the_row();
-                        $product_post = get_sub_field('fp_product');
-                        if ($product_post):
-                            setup_postdata($product_post);
-                            global $product; 
-                            ?>
-                            <a href="<?php the_permalink($product_post->ID); ?>"  class="product flex flex-col group">
-                                <?php 
-                                    if (has_post_thumbnail($product_post->ID)): 
-                                ?>
-                                    <div class="product-image w-full h-auto overflow-hidden">
-                                        <?php 
-                                            echo get_the_post_thumbnail($product_post->ID, 'product-square', ['class' => 'post-thumbnail group-hover:scale-110 transition-transform duration-300']);
+        <?php endif; ?>
+        
+        <div id="products-splide" class="splide overflow-visible mt-12" data-splide='{
+            "type": "loop",
+            "perPage": 4,
+            "perMove": 1,
+            "gap": "3vw",
+            "pagination": true,
+            "arrows": true,
+            "pauseOnHover": true,
+            "autoplay": false,
+            "breakpoints": {
+                "1024": {"perPage": 3},
+                "768": {"perPage": 2},
+                "480": {"perPage": 1, "pagination": true}
+            }
+        }'>
+            <div class="splide__track ">
+                <ul class="splide__list">
+                    <?php
+                        if (have_rows('fp_products')):
+                            while (have_rows('fp_products')) : the_row();
+                                $product_post = get_sub_field('fp_product');
+                                if ($product_post):
+                                    setup_postdata($product_post);
+                                    global $product; 
+                                    ?>
+                                    <li class="splide__slide">
+                                        <a href="<?php the_permalink($product_post->ID); ?>"  class="product flex flex-col group">
+                                            <?php 
+                                                if (has_post_thumbnail($product_post->ID)): 
+                                            ?>
+                                                <div class="product-image w-full h-auto overflow-hidden">
+                                                    <?php 
+                                                        echo get_the_post_thumbnail($product_post->ID, 'product-square', ['class' => 'post-thumbnail group-hover:scale-110 transition-transform duration-300']);
 
-                                        ?>
-                                    </div>
-                                <?php endif; ?>
+                                                    ?>
+                                                </div>
+                                            <?php endif; ?>
 
-                                <div class="product-content mt-8">
-                                    <h4 class="heading-four text-center"><?= get_the_title($product_post->ID); ?></h4>
-                                </div>
-                            </a>
-                            <?php   
-                            wp_reset_postdata();
+                                            <div class="product-content mt-8">
+                                                <h4 class="heading-four text-center"><?= get_the_title($product_post->ID); ?></h4>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <?php   
+                                    wp_reset_postdata();
+                                endif;
+                            endwhile;
+                        else:
+                            echo '<p>No products found.</p>';
                         endif;
-                    endwhile;
-                else:
-                    echo '<p>No products found.</p>';
-                endif;
-            ?>
-        </div>
+                    ?>
+                </ul>
+            </div>
+
+        
     </div>    
 </section>
 

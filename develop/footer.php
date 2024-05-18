@@ -18,6 +18,10 @@
 					<a href="<?php bloginfo('url');?>" class="site-logo">
 						<img class="w-[200px]" src="<?= get_stylesheet_directory_uri();?>/assets/img/footer/footer-logo.png" alt="<?php bloginfo('name');?> Logo"/>
 					</a>
+					<div class="flex items-center gap-x-4 mt-6 text-2xl">
+						<a href="https://www.facebook.com/people/Bark-Bites-Natural-Treats/100086821017309/"><i class="fa-brands fa-facebook"></i></a>
+						<a href="https://www.instagram.com/barkbitesnaturaltreats/"><i class="fa-brands fa-instagram"></i></a>
+					</div>
 				</div><!-- .site-branding -->
 
 				<div class="contact-details text-[15px] lg:text-[16px] flex flex-col gap-y-5 md:order-1">

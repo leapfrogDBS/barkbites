@@ -18,7 +18,7 @@ $section_text = get_acf('posts_section_text');
 // Default args for WP_Query
 $args = array(
     'post_type' => 'post',
-    'posts_per_page' => 4, // Adjust the number of posts you'd like to display
+    'posts_per_page' => -1, // Adjust the number of posts you'd like to display
 );
 
 // If 'all_categories' is not checked and there is a selected category
@@ -72,29 +72,49 @@ if (!empty($block['className'])) {
             <?= esc_html($button_label); ?>
         </a>
 
-        <div class="posts mt-8 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-5">
-            <?php if ($the_query->have_posts()) : ?>
-                <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-                    <div class="post-item flex flex-col h-full">
-                        <?php if (has_post_thumbnail()): ?>
-                            <div class="post-image mb-8">
-                                <?php the_post_thumbnail('custom-size', ['class' => 'post-thumbnail']); ?>
-                            </div>
-                        <?php endif; ?>
-                        <div class="post-title">
-                            <h4 class="heading-four"><?php the_title(); ?></h4>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-end">
-                        <a href="<?php the_permalink(); ?>" class="inline-block btn btn-copper mt-4 self-start">
-                            Read more
-                        </a>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
-                <?php wp_reset_postdata(); ?>
-            <?php else : ?>
-                <p>No posts found.</p>
-            <?php endif; ?>
+        <div id="posts-splide" class="splide overflow-visible mt-12" data-splide='{
+            "type": "loop",
+            "perPage": 4,
+            "perMove": 1,
+            "gap": "3vw",
+            "pagination": true,
+            "arrows": true,
+            "pauseOnHover": true,
+            "autoplay": false,
+            "breakpoints": {
+                "1024": {"perPage": 3},
+                "768": {"perPage": 2},
+                "480": {"perPage": 1, "pagination": true}
+            }
+        }'>
+            <div class="splide__track ">
+                <ul class="splide__list">
+                    <?php if ($the_query->have_posts()) : ?>
+                        <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+                            <li class="splide__slide">
+                                <div class="post-item flex flex-col h-full">
+                                    <?php if (has_post_thumbnail()): ?>
+                                        <div class="post-image mb-8">
+                                            <?php the_post_thumbnail('custom-size', ['class' => 'post-thumbnail']); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="post-title">
+                                        <h4 class="heading-four"><?php the_title(); ?></h4>
+                                    </div>
+                                    <div class="flex-1 flex flex-col justify-end">
+                                    <a href="<?php the_permalink(); ?>" class="inline-block btn btn-copper mt-4 self-start">
+                                        Read more
+                                    </a>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php endwhile; ?>
+                        <?php wp_reset_postdata(); ?>
+                    <?php else : ?>
+                        <p>No posts found.</p>
+                    <?php endif; ?>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
