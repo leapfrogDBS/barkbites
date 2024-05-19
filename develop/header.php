@@ -28,6 +28,7 @@
 	})(window,document,'script','dataLayer','GTM-5WBL2X96');</script>
 	<!-- End Google Tag Manager -->
 
+	
 	<?php wp_head(); ?>
 </head>
 
