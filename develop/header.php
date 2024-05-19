@@ -27,7 +27,6 @@
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-5WBL2X96');</script>
 	<!-- End Google Tag Manager -->
-	
 
 	<?php wp_head(); ?>
 </head>
