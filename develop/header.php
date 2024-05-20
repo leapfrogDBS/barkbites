@@ -89,7 +89,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					</div>
 				<?php endif;?>
 
-				<div>
+				<div class="hidden">
 					<button data-searchtoggle class="relative [&_svg]:transition-opacity outline-0 float-left">
 						<?php include(locate_template('assets/img/global/icon-search.svg'));?>
 					</button>
