@@ -45,4 +45,7 @@ jobs:
         REMOTE_USER: ${{ secrets.DEPLOY_SSH_USER }}
         DEPLOY_SSH_WP_PATH: ${{ secrets.DEPLOY_SSH_WP_PATH }}
       run: |
-        ssh -i deploy_key -p ${{ env.REMOTE_PORT }} -o StrictHostKeyChecking=no ${{ env.REMOTE_USER }}@${{ env.REMOTE_HOST }} 'cd ${{ env.DEPLOY_SSH_WP_PATH }} && wp sg purge'
+        ssh -i deploy_key -p ${{ env.REMOTE_PORT }} -o StrictHostKeyChecking=no ${{ env.REMOTE_USER }}@${{ env.REMOTE_HOST }} << 'EOF'
+          cd ${{ env.DEPLOY_SSH_WP_PATH }}
+          wp sg purge
+        EOF
