@@ -146,6 +146,14 @@ function barkbites_scripts() {
     wp_enqueue_script('splide-js', get_template_directory_uri() . '/scripts/lib/splide.min.js', array(), _S_VERSION, true);
 	wp_enqueue_script('splide-autoscroll-js', get_template_directory_uri() . '/scripts/lib/splide-extension-auto-scroll.min.js', array(), _S_VERSION, true);
 	wp_enqueue_script('splide-config-js', get_template_directory_uri() . '/scripts/site/splide-config.min.js', array('splide-js'), _S_VERSION, true);
+
+	/* Fancybox */
+	wp_enqueue_style('fancybox-css', get_template_directory_uri().'/assets/css/fancybox.css', '', _S_VERSION);
+    wp_enqueue_script('fancybox-js', get_template_directory_uri() . '/scripts/lib/fancybox.min.js', array(), _S_VERSION, true);
+    wp_enqueue_script('fancybox-config-js', get_template_directory_uri() . '/scripts/site/fancybox-config.min.js', array( 'fancybox-js' ), _S_VERSION, true);
+
+	/* Ajax */
+	wp_localize_script('barkbites-app-js', 'my_ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));  
 	
 }
 add_action('wp_enqueue_scripts', 'barkbites_scripts');
@@ -153,7 +161,7 @@ add_action('wp_enqueue_scripts', 'barkbites_scripts');
 
 /* Make styles available in the block editor */
 function mytheme_enqueue_block_editor_assets() {
-	wp_enqueue_style('davidmcdonagh-block-editor-style', get_template_directory_uri() . '/style.css', '', _S_VERSION);
+	wp_enqueue_style('barkbites-block-editor-style', get_template_directory_uri() . '/style.css', '', _S_VERSION);
 }
 add_action( 'enqueue_block_editor_assets', 'mytheme_enqueue_block_editor_assets' );
 

@@ -331,4 +331,125 @@ function mytheme_custom_woocommerce_thumbnail_size() {
 }
 add_filter('woocommerce_get_image_size_thumbnail', 'mytheme_custom_woocommerce_thumbnail_size');
 
-// Use custom image size for WooCommerce single product images
+/* Search Products and Posts */
+function barkbites_combined_search() {
+
+    $shop_page_url = get_permalink(wc_get_page_id('shop'));
+
+    // Function to modify the WHERE clause of SQL queries
+    function search_by_title_only($where, &$wp_query) {
+        global $wpdb;
+        if ($search_term = $wp_query->get('search_title_only')) {
+            // Modify the WHERE clause to search by title only
+            $where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql($wpdb->esc_like($search_term)) . '%\'';
+        }
+        return $where;
+    }
+
+    // Ensure $_POST['search'] is set and sanitize it
+    $search_term = isset($_POST['search']) ? sanitize_text_field($_POST['search']) : '';
+
+    // Search for Products
+    $product_args = array(
+        'post_type' => 'product',
+        'posts_per_page' => 6,
+        'search_title_only' => $search_term, // Set the custom flag for title-only search
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'post_status' => 'publish',
+    );
+
+    add_filter('posts_where', 'search_by_title_only', 10, 2);
+    $product_query = new WP_Query($product_args);
+    remove_filter('posts_where', 'search_by_title_only', 10);
+
+    ob_start();
+    if ($product_query->have_posts()) : 
+        echo '<div class="posts-search-results-container grid grid-cols-1 sm:grid-cols-2 gap-6">';
+        while ($product_query->have_posts()) : $product_query->the_post();
+            get_template_part('template-parts/content', 'search-product');
+        endwhile;
+        echo '</div>';
+    else :
+        echo '<p class="my-10 text-center h2">No products found</p>';
+    endif;
+    $product_html = ob_get_clean();
+    wp_reset_postdata();
+
+    // Search for Posts
+    $post_args = array(
+        'post_type' => array('post', 'page'),
+        'posts_per_page' => -1,
+        'search_title_only' => $search_term, // Use the same custom flag for title-only search
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'post_status' => 'publish',
+    );
+
+    add_filter('posts_where', 'search_by_title_only', 10, 2);
+    $post_query = new WP_Query($post_args);
+    remove_filter('posts_where', 'search_by_title_only', 10);
+
+    ob_start();
+    if ($post_query->have_posts()) : 
+        echo '<div class="posts-search-results-container grid grid-cols-1 sm:grid-cols-2 gap-6">';
+        while ($post_query->have_posts()) : $post_query->the_post();
+            get_template_part('template-parts/content', 'search-post');
+        endwhile;
+        echo '</div>';
+    else :
+        echo '<p class="my-10 text-center h2">No posts found</p>';
+    endif;
+    $post_html = ob_get_clean();
+    wp_reset_postdata();
+
+    $category_html = ''; // Initialize the variable to hold the output HTML for categories
+$categories = get_terms(array(
+    'taxonomy' => 'product_cat',
+    'name__like' => $search_term,
+    'hide_empty' => false,
+));
+
+ob_start();
+if (!empty($categories)) {
+    echo '<div class="category-search-results-container grid grid-cols-2 sm:grid-cols-2 gap-6">';
+    foreach ($categories as $category) {
+        $link = $shop_page_url . '?filter_category=' . $category->term_id;
+        $displayName = esc_html($category->name);
+
+        // Check if the category is a child
+        if ($category->parent != 0) {
+            // It's a child category, fetch the parent category name
+            $parent_category = get_term($category->parent, 'product_cat');
+            if (!is_wp_error($parent_category) && $parent_category) {
+                $displayName = esc_html($parent_category->name) . ' > ' . esc_html($category->name);
+                // Adjust the link for child category
+                $link = $shop_page_url . '?filter_category=' . $parent_category->term_id . '&filter_subcategory=' . $category->term_id;
+            }
+        }
+
+        // Output the link
+        echo '<a href="' . $link . '" class="category-result font-bold">' . $displayName . '</a>';
+    }
+    echo '</div>';
+} else {
+    echo '<p class="my-10 text-center h2">No categories found</p>';
+}
+$category_html = ob_get_clean();
+    wp_reset_postdata();
+
+    // Send JSON response
+    wp_send_json(array(
+        'products' => $product_html,
+        'posts' => $post_html,
+        'categories' => $category_html
+    ));
+
+    wp_die(); // This is required to terminate immediately and return a proper response
+}
+
+add_action('wp_ajax_barkbites_combined_search', 'barkbites_combined_search');
+add_action('wp_ajax_nopriv_barkbites_combined_search', 'barkbites_combined_search');
+
+
+

@@ -105,10 +105,10 @@
 					</div>
 				<?php endif;?>
 
-				<div class="hidden">
-					<button data-searchtoggle class="relative [&_svg]:transition-opacity outline-0 float-left">
+				<div>
+					<a href="#search-container" data-fancybox class="relative [&_svg]:transition-opacity outline-0 float-left">
 						<?php include(locate_template('assets/img/global/icon-search.svg'));?>
-					</button>
+					</a>
 				</div>
 
 				

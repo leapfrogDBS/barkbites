@@ -98,6 +98,8 @@
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
+<?php get_template_part('template-parts/search'); ?>
+
 <?php wp_footer(); ?>
 
 </body>
