@@ -27,8 +27,18 @@ $default_image_full_src = wp_get_attachment_image_url($post_thumbnail_id, 'full'
     <?php if ( $attachment_ids ) : ?>
         <div class="sticky top-12 mb-12">
             <div class="splide space-y-9" role="group" aria-label="Product Images" 
-                data-splide='{"arrows": false, "pagination": true, "type": "loop", "perPage": 1,
-                            "breakpoints": {"768": {"gap": "0"}}}'>
+                data-splide='{
+                                "arrows": false,
+                                "pagination": true,
+                                "type": "loop",
+                                "perPage": 1,
+                                "autoScroll" : false,
+                                "breakpoints": {
+                                    "768": {
+                                        "gap": "0"
+                                    }
+                                }
+                            }'>
                 <div class="splide__track">
                     <ul class="splide__list product-image-splide-list ">
                         <?php if ( $post_thumbnail_id ) : ?>

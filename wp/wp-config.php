@@ -98,7 +98,3 @@ define('WP_MEMORY_LIMIT', '512M');
 define('WP_DEBUG', true);
 define('WP_DEBUG_LOG', true);
 
-
-
-
-

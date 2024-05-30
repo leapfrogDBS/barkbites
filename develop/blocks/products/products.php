@@ -61,6 +61,7 @@ if (!empty($block['className'])) {
             "arrows": true,
             "pauseOnHover": true,
             "autoplay": false,
+            "autoScroll": false,
             "breakpoints": {
                 "1024": {"perPage": 3},
                 "768": {"perPage": 2},

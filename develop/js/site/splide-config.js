@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const splideElements = document.querySelectorAll('.splide');
 
     splideElements.forEach(function(splideElement) {
-        let splide = new Splide(splideElement).mount();
+        let splide = new Splide(splideElement).mount(window.splide.Extensions);
 
         // Adjust arrow visibility based on the number of slides and perPage option
         function adjustArrowsVisibility() {

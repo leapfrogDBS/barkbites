@@ -36,7 +36,7 @@ if (!empty($block['className'])) {
                     <?= ($copy); ?>
                 <?php endif; ?>
             </div>
-            <div id="health-badges-slider" class="splide mt-6" aria-label="Health Badges Logos Slider" data-splide='{"type": "loop", "perPage": 6, "perMove": 1, "pagination": false, "gap": "20px", "arrows": false, "pauseOnHover": true, "autoplay": true,  "breakpoints": {"520": {"perPage": 3}, "768": {"perPage": 4}, "1024": {"perPage": 5}} }'>
+            <div id="health-badges-slider" class="splide mt-6" aria-label="Health Badges Logos Slider" data-splide='{"type": "loop", "perPage": 6, "perMove": 1, "pagination": false, "gap": "20px", "arrows": false, "pauseOnHover": true, "autoScroll": {"speed": 0.5, "pauseOnHover": false}, "breakpoints": {"520": {"perPage": 3}, "768": {"perPage": 4}, "1024": {"perPage": 5}} }'>
                 <div class="splide__track w-[98%] mx-auto">
                     <ul class="splide__list">
                         <?php if( have_rows('feature_badges') ): ?>

@@ -48,7 +48,7 @@ p {
 
 /* Button Styles */
 .btn {
-    @apply font-semibold rounded-3xl py-3 px-12 cursor-pointer border-2;
+    @apply font-semibold rounded-3xl py-3 px-12 cursor-pointer border-2 text-center leading-4;
     &:hover {
         @apply transition-colors duration-300;
     }

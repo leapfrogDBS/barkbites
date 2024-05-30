@@ -38,6 +38,7 @@ if (!empty($block['className'])) {
                 "pagination": false,
                 "arrows": false,
                 "autoplay" : true,
+                "autoScroll": false,
                 "pauseOnHover": true
             }'>
             <div class="splide__track w-[80%] max-w-[838px] mx-auto ">

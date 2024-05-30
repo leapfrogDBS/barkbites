@@ -30,11 +30,11 @@ if (!empty($block['className'])) {
     <div class="container"> 
         <div class="flex flex-col items-center justify-center h-full">  
             <!-- Text Content -->
-            <div class="heading-one text-center text-white max-w-[1013px] z-10 relative slide-up">
+            <h1 class="heading-one text-center text-white max-w-[1013px] z-10 relative slide-up">
                 <?php if ($title): ?>
                     <?= do_shortcode($title); ?>
                 <?php endif; ?>
-            </div>
+            </h1>
             <?php if($btn_label): ?>
                 <a href="<?= get_permalink( wc_get_page_id( 'shop' ) ); ?>" class="mt-6 z-10 btn btn-white"><?= $btn_label; ?></a>
             <?php endif; ?>
