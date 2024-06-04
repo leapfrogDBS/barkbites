@@ -566,3 +566,12 @@
         fill: #fff !important;
     }
 }
+
+
+/* Search styles */
+.search-product .woocommerce-loop-product__title {
+    @apply mb-2 font-bold;
+    .star-rating {
+        @apply hidden;
+    }
+}

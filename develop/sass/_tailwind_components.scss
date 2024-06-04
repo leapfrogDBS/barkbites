@@ -39,7 +39,6 @@ p {
 
 }
 
-
 /* Layout Styles */
 .container {
     max-width: 1400px;
@@ -92,4 +91,9 @@ p {
     ul {
         @apply list-disc list-inside space-y-2 mb-4;
     }
+}
+
+
+.custom-border {
+    @apply border-dashed border-gray-300;
 }

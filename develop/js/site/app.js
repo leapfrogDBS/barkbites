@@ -61,10 +61,14 @@ App = {
             searchInput.value = ''; // Clear the search input
             searchContent.innerHTML = ''; // Clear the product search results
             newsContent.innerHTML = ''; // Clear the news search results
+            categoryContent.innerHTML = ''; // Clear the category search results
             const productControls = document.querySelector('.search-products-container').previousElementSibling;
             const postControls = document.querySelector('.post-results-container').previousElementSibling;
+            const categoryControls = document.querySelector('.category-results-container').previousElementSibling;
+            
             productControls.classList.add('invisible');
             postControls.classList.add('invisible');
+            categoryControls.classList.add('invisible');
         }
     },
 

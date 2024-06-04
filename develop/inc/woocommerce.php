@@ -371,7 +371,7 @@ function barkbites_combined_search() {
         endwhile;
         echo '</div>';
     else :
-        echo '<p class="my-10 text-center h2">No products found</p>';
+        echo '<p class="my-4 text-center h2">No Products found</p>';
     endif;
     $product_html = ob_get_clean();
     wp_reset_postdata();
@@ -398,13 +398,13 @@ function barkbites_combined_search() {
         endwhile;
         echo '</div>';
     else :
-        echo '<p class="my-10 text-center h2">No posts found</p>';
+        echo '<p class="my-4 text-center h2">No Articles found</p>';
     endif;
     $post_html = ob_get_clean();
     wp_reset_postdata();
 
     $category_html = ''; // Initialize the variable to hold the output HTML for categories
-$categories = get_terms(array(
+	$categories = get_terms(array(
     'taxonomy' => 'product_cat',
     'name__like' => $search_term,
     'hide_empty' => false,
@@ -433,7 +433,7 @@ if (!empty($categories)) {
     }
     echo '</div>';
 } else {
-    echo '<p class="my-10 text-center h2">No categories found</p>';
+    echo '<p class="my-4 text-center h2">No Categories found</p>';
 }
 $category_html = ob_get_clean();
     wp_reset_postdata();
