@@ -378,7 +378,7 @@ function barkbites_combined_search() {
 
     // Search for Posts
     $post_args = array(
-        'post_type' => array('post', 'page'),
+        'post_type' => array('post'),
         'posts_per_page' => -1,
         'search_title_only' => $search_term, // Use the same custom flag for title-only search
         'orderby' => 'title',
@@ -417,19 +417,8 @@ if (!empty($categories)) {
         $link = $shop_page_url . '?filter_category=' . $category->term_id;
         $displayName = esc_html($category->name);
 
-        // Check if the category is a child
-        if ($category->parent != 0) {
-            // It's a child category, fetch the parent category name
-            $parent_category = get_term($category->parent, 'product_cat');
-            if (!is_wp_error($parent_category) && $parent_category) {
-                $displayName = esc_html($parent_category->name) . ' > ' . esc_html($category->name);
-                // Adjust the link for child category
-                $link = $shop_page_url . '?filter_category=' . $parent_category->term_id . '&filter_subcategory=' . $category->term_id;
-            }
-        }
-
         // Output the link
-        echo '<a href="' . $link . '" class="category-result font-bold">' . $displayName . '</a>';
+        echo '<a href="' . esc_url($link) . '" class="category-result font-bold">' . $displayName . '</a>';
     }
     echo '</div>';
 } else {
@@ -452,4 +441,76 @@ add_action('wp_ajax_barkbites_combined_search', 'barkbites_combined_search');
 add_action('wp_ajax_nopriv_barkbites_combined_search', 'barkbites_combined_search');
 
 
+
+
+/* Hide Uncategorised from the woocommerce categories list */
+add_filter('get_terms', 'hide_uncategorised_category', 10, 3);
+
+function hide_uncategorised_category($terms, $taxonomies, $args) {
+    $uncategorized_term_id = get_option('default_product_cat'); // Get the default product category ID
+    
+    // Check if we are working with product categories and if the 'hide_empty' argument is not set to false
+    if (in_array('product_cat', $taxonomies) && !isset($args['hide_empty']) || $args['hide_empty'] !== false) {
+        foreach ($terms as $key => $term) {
+            if ($term->term_id == $uncategorized_term_id) {
+                unset($terms[$key]);
+            }
+        }
+    }
+    
+    return $terms;
+}
+
+
+/* Category Filters on shop page */
+
+function filter_products_by_category() {
+    check_ajax_referer('filter_products_nonce', 'nonce');
+
+    $category_ids = isset($_POST['categories']) ? array_map('intval', $_POST['categories']) : array();
+
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => -1, // Load all matching products
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field'    => 'term_id',
+                'terms'    => $category_ids,
+                'operator' => 'IN',
+            ),
+        ),
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            wc_get_template_part('content', 'product');
+        }
+    } else {
+        echo '<p>No products found</p>';
+    }
+
+    wp_reset_postdata();
+    wp_die();
+}
+
+add_action('wp_ajax_filter_products', 'filter_products_by_category');
+add_action('wp_ajax_nopriv_filter_products', 'filter_products_by_category');
+
+/* Enqueue product filters js file */
+function theme_enqueue_filters() {
+    // Enqueue your custom JS
+    wp_enqueue_script('product-filters', get_template_directory_uri() . '/scripts/site/product-filters.min.js', array(), null, true);
+
+    // Localize script to pass data
+    wp_localize_script('product-filters', 'ajax_params', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce'    => wp_create_nonce('filter_products_nonce')
+    ));
+}
+
+add_action('wp_enqueue_scripts', 'theme_enqueue_filters');
 

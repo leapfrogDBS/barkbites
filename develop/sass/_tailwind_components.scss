@@ -1,3 +1,7 @@
+:root {
+    --dynamic-top-offset: 120px; /* For dynamic adjustments */
+}
+
 /* Text Styles */
 
 @font-face {
@@ -42,7 +46,7 @@ p {
 /* Layout Styles */
 .container {
     max-width: 1400px;
-    @apply max-w-none py-12 md:py-20;
+    @apply max-w-none py-12 md:py-20 relative z-10;
 }
 
 /* Button Styles */

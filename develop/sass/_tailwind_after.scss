@@ -575,3 +575,144 @@
         @apply hidden;
     }
 }
+
+
+/* Standard Hero Section */
+#standard-hero {
+    @apply relative;    
+    &::before {
+        content: "";
+        @apply absolute inset-0 bg-copper bg-opacity-70 z-10;
+    }
+    .bg-image {
+        background-color: lightgray;
+        filter: grayscale(100%);
+        @apply absolute inset-0 bg-cover bg-center bg-no-repeat z-0 bg-fixed;
+    }
+}
+
+
+/* Shop page */
+.shop-page-items {
+    #selected-categories {
+        @apply flex gap-2.5 flex-wrap;
+        .selected-category {
+            @apply text-[16px] font-bold py-2.5 px-4 border border-solid border-copper rounded;
+            .remove-category {
+                @apply ml-2 cursor-pointer;
+            }
+        }
+    }
+    .orderby {
+        @apply h-10 bg-white border border-copper outline-none;
+    }
+    .shop-filters {
+        @apply flex flex-col gap-y-4 ;
+        .filter-group {
+            @apply border-b-2 border-copper border-dashed mr-12;
+            .accordion-button {
+                @apply flex justify-start items-center gap-x-5 cursor-pointer py-6;
+                // Add additional styles here
+              .filter-title {
+                @apply heading-three;
+                }
+              .chevron {
+                // Chevron initial state
+                @apply transition-transform duration-300;
+              
+                &.rotate {
+                  @apply rotate-180; // Tailwind class to rotate the chevron
+                }
+              } 
+            }
+            &:last-child {
+                @apply border-b-0;
+            }
+            
+            .filters-container {
+                @apply pb-8 pt-2;
+            }
+            .filter-terms {
+                @apply flex flex-col gap-y-4; 
+                .filter-checkbox {
+                    @apply flex gap-x-2 items-center;
+                    label {
+                        @apply font-bold leading-none text-sm;
+                    }
+                    input {
+                        @apply w-4 h-4 border border-solid border-copper flex-shrink-0;
+                    }
+                }
+                &.character {
+                    @apply inline-flex flex-row flex-wrap gap-4;
+                    img {
+                        @apply border border-solid rounded-full border-copper;
+                        &.active {
+                            @apply border-4 border-copper;
+                        
+                        }
+                    }
+                }
+                .noUi-connect {
+                    @apply bg-copper mb-2;
+                }
+                
+            }
+        }
+    }
+    .shop-products {
+        .woocommerce-result-count {
+            @apply mb-2;
+        }
+        .orderby {
+            @apply mb-5;
+        }
+        .products {
+            @apply grid gap-x-10 grid-cols-2 lg:grid-cols-3 md:gap-x-20 gap-y-12;
+        
+            .woocommerce-LoopProduct-link {
+                @apply flex flex-col border-b-2 border-copper border-dashed pb-5 h-full;
+                img {
+                    @apply w-full;
+                }
+                .woocommerce-loop-product__title {
+                    @apply text-[15px] font-semibold md:text-[16px] md:font-bold mt-7;
+                }
+                .price {
+                    @apply text-[20px] font-bold mt-4 block;
+                }
+            }
+        }
+    }
+}
+
+
+/*Checkbox Styles*/
+.filter-checkbox input[type='checkbox'] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    @apply bg-white border border-solid border-black h-4 w-4 flex-shrink-0 cursor-pointer relative;
+    
+
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 12px;
+        height: 12px;
+        background-image: url('assets/img/global/checkmark.svg'); 
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: transform 0.3s ease;
+        opacity: 0;
+    }
+
+    &:checked:after {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
