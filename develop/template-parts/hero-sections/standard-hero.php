@@ -23,7 +23,7 @@
     }
 
     // Fallback image URL
-    $fallback_image_url = get_template_directory_uri() . '/assets/img/global/hero-fallback.jeg';
+    $fallback_image_url = get_template_directory_uri() . '/assets/img/global/hero-fallback.jpg';
 
     // Use fallback image if $bg_image_url is empty
     if (empty($bg_image_url)) {
