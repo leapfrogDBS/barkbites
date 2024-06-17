@@ -582,7 +582,7 @@
     @apply relative;    
     &::before {
         content: "";
-        @apply absolute inset-0 bg-copper bg-opacity-70 z-10;
+        @apply absolute inset-0 bg-copper bg-opacity-20 z-10;
     }
     .bg-image {
         background-color: lightgray;
@@ -637,7 +637,7 @@
                 .filter-checkbox {
                     @apply flex gap-x-2 items-center;
                     label {
-                        @apply font-bold leading-none text-sm;
+                        @apply font-bold text-sm leading-tight;
                     }
                     input {
                         @apply w-4 h-4 border border-solid border-copper flex-shrink-0;
@@ -721,4 +721,30 @@
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
+}
+
+
+
+/* Mega Menu */
+.shop-item:hover > .mega-menu-content {
+    display: block;
+}
+
+.shop-item {
+    @apply flex items-center gap-x-2;
+    &.mega-menu-open {
+        .chevron-svg { 
+            transform: rotate(180deg);           
+        }    
+    }
+    .chevron-svg  {
+        transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for rotate and color */
+    }
+}
+.mega-menu-content {
+    a:hover {
+        @apply text-copper;
+    
+    }
+  
 }

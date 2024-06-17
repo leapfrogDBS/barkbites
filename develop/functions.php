@@ -50,6 +50,7 @@ function barkbites_setup() {
 	register_nav_menus(
 		array(
 			'menu-1' => esc_html__( 'Primary', 'barkbites' ),
+			'mega-menu-categories' => esc_html__( 'Mega Menu Categories', 'barkbites' ),
 		)
 	);
 
@@ -281,6 +282,35 @@ function cc_mime_types($mimes) {
     }
 }
 
+/* Custom Walker Nav Menu */
+class Custom_Walker_Nav_Menu extends Walker_Nav_Menu {
+    function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
+        if ($item->title == 'Shop' && $depth === 0) {
+            // Add a class to the 'Shop' menu item
+            $item->classes[] = 'shop-item';
+            
+            // Start capturing the output for the menu item
+            ob_start();
+            parent::start_el($output, $item, $depth, $args, $id);
+            
+            // Add the chevron SVG
+            $chevron_svg_path = get_template_directory() . '/assets/img/global/chevron.svg';
+            if (file_exists($chevron_svg_path)) {
+                include $chevron_svg_path;
+            }
+
+            // Include the mega menu content
+            
+            $mega_menu_content = ob_get_clean();
+
+            // Append the captured output and mega menu content
+            $output .= $mega_menu_content;
+        } else {
+            // Default behavior for other menu items
+            parent::start_el($output, $item, $depth, $args, $id);
+        }
+    }
+}
 
 
 // ADD ACF OPTIONS PAGE

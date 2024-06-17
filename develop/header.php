@@ -83,6 +83,7 @@
 								'items_wrap' => '<ul class="menu-links flex flex-col md:flex-row items-center flex-wrap gap-y-4 gap-x-8">%3$s</ul>',
 								'fallback_cb' => false,
 								'depth' => 3,
+								'walker' => new Custom_Walker_Nav_Menu(),
 							)
 						);
 					?>
@@ -138,6 +139,7 @@
 			</div>
 
 		</div>
+		<?php get_template_part('template-parts/mega-menu'); ?>
 	</header><!-- #masthead -->
 
 
