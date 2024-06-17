@@ -44,14 +44,14 @@ do_action( 'woocommerce_shop_loop_header' );
 ?>
 <section class="shop-page-items">
 	
-	<div class="flex justify-between gap-x-12 !mt-0 pt-8 md:border-t-2 custom-border">
+	<div class="flex flex-col md:flex-row justify-between gap-x-12 !mt-0 pt-8 md:border-t-2 custom-border">
 		
-		<div class="hidden md:block shop-filers-container sticky top-[var(--dynamic-top-offset)] h-screen overflow-auto w-1/3 pb-24">
+		<div class="shop-filers-container md:sticky md:top-[var(--dynamic-top-offset)] md:h-screen overflow-auto md:w-1/3 pb-24">
 			<div class="shop-filters">
 				<div class="filter-group">
-					<div class="accordion-button">
-						<h3 class="filter-title heading-three">Browse by benefit</h3>
-					</div>
+					
+						<h3 class="filter-title heading-three mb-6">Browse by benefit</h3>
+					
 					<div class="filters-container category-filter">
 						<div class="filter-terms">
 							<?php
@@ -152,7 +152,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		var parentCheckbox = document.querySelector('.product-category[value="' + filteredCategory + '"]');
 		if (parentCheckbox) {
 			parentCheckbox.checked = true;
-		}
+			// Trigger change event to run filters
+            parentCheckbox.dispatchEvent(new Event('change'));
+		}	
 	}
 });
 

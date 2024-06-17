@@ -469,18 +469,31 @@ function filter_products_by_category() {
 
     $category_ids = isset($_POST['categories']) ? array_map('intval', $_POST['categories']) : array();
 
-    $args = array(
-        'post_type' => 'product',
-        'posts_per_page' => -1, // Load all matching products
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'product_cat',
-                'field'    => 'term_id',
-                'terms'    => $category_ids,
-                'operator' => 'IN',
+    if (empty($category_ids)) {
+        // Load all products if no categories are selected
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => -1, // Load all products
+            'orderby' => array(
+                'menu_order' => 'ASC',
+                'title' => 'ASC'
+            )
+        );
+    } else {
+        // Load products from selected categories
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => -1, // Load all matching products
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'term_id',
+                    'terms'    => $category_ids,
+                    'operator' => 'IN',
+                ),
             ),
-        ),
-    );
+        );
+    }
 
     $query = new WP_Query($args);
 

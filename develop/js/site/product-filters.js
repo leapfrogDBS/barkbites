@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const categoryCheckboxes = document.querySelectorAll('.product-category');
-    const productsContainer = document.querySelector('.shop-products');
+    const productsContainer = document.querySelector('.shop-products .products');
 
     categoryCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {

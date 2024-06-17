@@ -679,9 +679,15 @@
                     @apply text-[15px] font-semibold md:text-[16px] md:font-bold mt-7;
                 }
                 .price {
-                    @apply text-[20px] font-bold mt-4 block;
+                    @apply text-[16px] font-bold mt-4 block;
                 }
             }
+            .button.product_type_simple, .button.product_type_variable {
+                @apply hidden;
+            }
+        }
+        .woocommerce-ordering, .woocommerce-result-count { /* For now hide the ordering on shop page and results count */
+            @apply hidden;
         }
     }
 }
