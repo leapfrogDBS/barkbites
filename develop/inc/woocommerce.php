@@ -310,7 +310,7 @@ function show_all_products_on_shop_page() {
 /* Apply shipping rates based on cart weight */
 add_filter( 'woocommerce_package_rates', 'quadlayers_woocommerce_tiered_shipping', 9999, 2 );
 function quadlayers_woocommerce_tiered_shipping( $rates, $package ) {
-if ( WC()->cart->get_cart_contents_weight() < 2000 ) {
+if ( WC()->cart->get_cart_contents_weight() <= 2000 ) {
 if ( isset( $rates['flat_rate:4'] ) ) unset( $rates['flat_rate:5'], $rates['flat_rate:6'] );
 } elseif ( WC()->cart->get_cart_contents_weight() < 10000 ) {
 if ( isset( $rates['flat_rate:5'] ) ) unset( $rates['flat_rate:4'], $rates['flat_rate:6'] );
